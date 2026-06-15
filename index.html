@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="João Daniel Espanhol Miguel — AI solutions implementer. Building with Claude API, faster-whisper, and modern data infrastructure.">
+  <title>João Daniel Espanhol Miguel</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #21262d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --tag-bg: #1f2937;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(13, 17, 23, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 72px 0 56px;
+    }
+
+    .hero-greeting {
+      font-size: 13px;
+      color: var(--accent2);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .hero-name {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero-tagline {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: opacity 0.15s;
+    }
+
+    .btn:hover { opacity: 0.85; text-decoration: none; }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0d1117;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 32px;
+      max-width: 520px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      transition: border-color 0.15s;
+    }
+
+    .project-card:hover { border-color: #444c56; }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .project-name {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .project-link {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+
+    .project-link:hover {
+      color: var(--text);
+      text-decoration: none;
+      border-color: #444c56;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.3px;
+    }
+
+    .tag.green { color: var(--accent2); }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .about-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .about-item-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .about-item-value {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    /* ── SKILLS ── */
+    .skill-group {
+      margin-bottom: 20px;
+    }
+
+    .skill-group-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    /* ── WRITING ── */
+    .article-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .article-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .article-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .article-desc {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero-name { font-size: 28px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <span class="nav-name">João Miguel</span>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#writing">Writing</a>
+        <a href="https://linkedin.com/in/joão-espanhol-miguel" target="_blank">LinkedIn</a>
+        <a href="https://github.com/espanhol6" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="container">
+    <div class="hero">
+      <div class="hero-greeting">Available for new opportunities</div>
+      <h1 class="hero-name">João Daniel<br>Espanhol Miguel</h1>
+      <p class="hero-tagline">
+        I build end-to-end AI solutions — voice assistants, multi-agent systems, and data infrastructure for enterprise clients. Currently in Lisbon, open to London and Dublin.
+      </p>
+      <div class="hero-links">
+        <a class="btn btn-primary" href="mailto:[SEU-EMAIL]">Get in touch</a>
+        <a class="btn btn-secondary" href="https://github.com/espanhol6" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+        <a class="btn btn-secondary" href="CV João Daniel — Anthropic.html" target="_blank">CV (PDF)</a>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-label">Work</div>
+      <h2 class="section-title">Selected projects</h2>
+      <p class="section-sub">Real systems in production or active use — not demos.</p>
+
+      <div class="projects">
+
+        <!-- Gémeo -->
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-name">Gémeo Conselheiro — Voice AI Assistant</div>
+            <div class="project-links">
+              <a class="project-link" href="https://github.com/espanhol6/gemeo-conselheiro" target="_blank">GitHub →</a>
+            </div>
+          </div>
+          <p class="project-desc">
+            Voice AI assistant running almost entirely on the local machine. Terminal push-to-talk mode and phone call mode (connect phone over Wi-Fi — adaptive VAD, fully hands-free). Only the conversation text leaves the device. Diagnosed and resolved a silent native crash (exit code 5, 0xC0000005) caused by ctranslate2/WinRT initialization order — identified through binary-search debugging with unbuffered Python output, with no traceback available.
+          </p>
+          <div class="tags">
+            <span class="tag green">Claude API</span>
+            <span class="tag">faster-whisper</span>
+            <span class="tag">WinRT TTS</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">WebSocket</span>
+            <span class="tag">Python</span>
+            <span class="tag">adaptive VAD</span>
+          </div>
+        </div>
+
+        <!-- Cluster OS Jarvis -->
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-name">Cluster OS Jarvis — Multi-Agent Platform</div>
+            <div class="project-links">
+              <a class="project-link" href="https://github.com/espanhol6/cluster-os" target="_blank">GitHub →</a>
+            </div>
+          </div>
+          <p class="project-desc">
+            Production multi-agent framework embedded in an internal operations platform serving 26 consultants. Uses the Anthropic Messages API natively — SSE streaming, tool-calling loops (up to 6 rounds), and cron-scheduled autonomous agents. Provider-agnostic AI client (Anthropic, Groq, Gemini, Ollama) with AES-256-GCM encrypted credentials and row-level security via Supabase.
+          </p>
+          <div class="tags">
+            <span class="tag green">Anthropic API (native)</span>
+            <span class="tag">SSE streaming</span>
+            <span class="tag">tool-calling</span>
+            <span class="tag">Next.js 16</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">AES-256-GCM</span>
+          </div>
+        </div>
+
+        <!-- Sonangol Reporting -->
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-name">Sonangol Reporting Infrastructure — Cluster Advisory</div>
+            <div class="project-links">
+              <span class="project-link" style="cursor:default">Enterprise</span>
+            </div>
+          </div>
+          <p class="project-desc">
+            Sole technical lead for end-to-end reporting infrastructure across Sonangol (national oil company), ARBRA Partners, and Sefer. Data source integration → Power BI dashboards → custom HTML/JS intranet portal → knowledge transfer and full operational handoff to 40+ stakeholders across two countries. Managed data governance, access control, and security policies throughout.
+          </p>
+          <div class="tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">DAX</span>
+            <span class="tag">Microsoft Fabric</span>
+            <span class="tag">SharePoint</span>
+            <span class="tag">HTML/JS</span>
+            <span class="tag">SQL</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-label">About</div>
+      <h2 class="section-title">Background</h2>
+      <p class="section-sub">
+        I started in revenue management (hospitality, 17 hotels, 35 distribution channels) and pivoted hard into data and AI. Now I build full-stack solutions — from data pipelines and dashboards to voice assistants and multi-agent systems using the Claude API. I also run a small consultancy (Potencializa BI Solutions) and am finishing an MSc in Information Management at NOVA IMS.
+      </p>
+
+      <div class="about-grid">
+        <div class="about-item">
+          <div class="about-item-label">Current role</div>
+          <div class="about-item-value">Lead Data Analyst, Cluster Advisory<br><span style="color: var(--muted); font-size:13px">Feb 2025 – present</span></div>
+        </div>
+        <div class="about-item">
+          <div class="about-item-label">Education</div>
+          <div class="about-item-value">MSc Information Management<br><span style="color: var(--muted); font-size:13px">NOVA IMS · 2024–2026</span></div>
+        </div>
+        <div class="about-item">
+          <div class="about-item-label">Location</div>
+          <div class="about-item-value">Lisbon, Portugal<br><span style="color: var(--muted); font-size:13px">Open to London / Dublin</span></div>
+        </div>
+        <div class="about-item">
+          <div class="about-item-label">Also</div>
+          <div class="about-item-value">Founder, Potencializa BI Solutions<br><span style="color: var(--muted); font-size:13px">Jan 2025 – present</span></div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="skill-group">
+        <div class="skill-group-label">AI & APIs</div>
+        <div class="tags">
+          <span class="tag green">Claude API (Anthropic)</span>
+          <span class="tag">faster-whisper</span>
+          <span class="tag">SSE streaming</span>
+          <span class="tag">tool-calling</span>
+          <span class="tag">prompt engineering</span>
+          <span class="tag">multi-agent</span>
+          <span class="tag">WinRT Speech</span>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Data & BI</div>
+        <div class="tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">DAX</span>
+          <span class="tag">Microsoft Fabric</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Development</div>
+        <div class="tags">
+          <span class="tag">Next.js 16</span>
+          <span class="tag">React</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Vercel</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Git</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WRITING -->
+    <section id="writing">
+      <div class="section-label">Writing</div>
+      <h2 class="section-title">Technical posts</h2>
+      <p class="section-sub">Notes on things I've debugged or built.</p>
+
+      <div class="article-card">
+        <div class="article-icon">🔧</div>
+        <div>
+          <div class="article-title">
+            <a href="https://linkedin.com/in/joão-espanhol-miguel" target="_blank">
+              Debugging a silent native crash: faster-whisper + WinRT initialization order on Windows
+            </a>
+          </div>
+          <p class="article-desc">
+            How I diagnosed an exit code 5 (0xC0000005) crash with no traceback when combining ctranslate2 and WinRT in the same Python process. Binary-search debugging, unbuffered stdout, and the exact fix.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>João Daniel Espanhol Miguel · Lisbon · <a href="mailto:[SEU-EMAIL]">[SEU-EMAIL]</a> · <a href="https://github.com/espanhol6" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/joão-espanhol-miguel" target="_blank">LinkedIn</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
